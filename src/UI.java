@@ -1,20 +1,51 @@
 import javax.swing.*;
-public class UI extends JFrame  {
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
+public class UI extends JFrame implements KeyListener {
 
+    private Hero hero;
     UI (){
         setSize(1000, 700);
         setLayout( null);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        JButton  button2 = new MyImage("src/cprite1.png");
-        button2.setBounds(100, 200, 100, 120);
+        addKeyListener( this);
+        // Встановлюємо, що JFrame має бути фокусованим
+        setFocusable(true);
+        requestFocusInWindow();
 
-        add(button2);
+        hero = new Hero("src/cprite1.png");
+        hero.setBounds(100, 200, 100, 120);
 
+        add(hero);
         setVisible(true);
 
     }
 
 
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        System.out.println(String.valueOf(e.getKeyCode()));
+        switch (e.getKeyCode()){
+            case 68:
+                hero.stepRight();
+                break;
+            case 65:
+                hero.stepLeft();
+                break;
+            case 32:
+
+                break;
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+
+    }
 }
 
